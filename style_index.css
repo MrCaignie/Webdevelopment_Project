@@ -1,0 +1,69 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /* Change the link color to #111 (black) on hover */
+  li a:hover {
+    background-color: #111;
+  }
+
+  .login, .registreren {
+    float: right;
+  }
+
+  body {
+    font-size: 25px;  /* Standaard lettergrootte in pixels */
+}
+
+
+
+/* Stijlen voor de clubinformatie */
+.club-logo {
+    width: 1000px; /* Pas dit aan op basis van je logo-afmetingen */
+    height: auto;
+    display: flex;  /* Enable Flexbox */
+    justify-content: space-between;  /* Spread elements across the container */
+    align-items: center;  /* Center elements vertically */
+}
+
+.club-info {
+    text-align: right;
+}
+
+.club-overview {
+    text-align: right;
+}
+
+/* Stijlen voor contactinformatie */
+.contact-info {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.social-media {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.social-media a {
+    text-decoration: none;
+    color: #000; /* Pas de kleur aan als nodig */
+    font-weight: bold;
+}

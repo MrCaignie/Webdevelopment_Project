@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <nav> <!-- Verzamelt alle navigatie-items -->
         <ul>
             <li><a href=index.php>Home</a></li> <!-- Links aan de linkerkant -->
-            <li><a href="about.php">About</a></li>
+            <li><a href="about.php">Info</a></li>
             <li><a href="news.php">News</a></li>
             <li><a href="contact.php">Contact</a></li>
             <li class="login"><a href="login.php">Login</a></li> <!-- Log in knop aan de rechterkant -->

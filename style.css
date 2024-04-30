@@ -26,3 +26,7 @@ ul {
   .login, .registreren {
     float: right;
   }
+
+  body {
+    font-size: 25px;  /* Standaard lettergrootte in pixels */
+}
