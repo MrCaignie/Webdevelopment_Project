@@ -1,0 +1,91 @@
+.navigatie {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  .navigatie li {
+    float: left;
+  }
+  
+  .navigatie li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /* Change the link color to #111 (black) on hover */
+  .navigatie li a:hover {
+    background-color: #111;
+  }
+
+  .login, .registreren {
+    float: right;
+  }
+
+  body {
+    font-size: 25px;  /* Standaard lettergrootte in pixels */
+}
+
+
+
+/* Secties Stijlen */
+h1, h2, h3 {
+    color: #333; /* Donkere kopteksten */
+}
+
+section {
+    margin: 20px; /* Ruimte rond de secties */
+    padding: 20px;
+    background-color: white; /* Witte achtergrond voor secties */
+    border-radius: 5px; /* Afgeronde hoeken */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1); /* Subtiele schaduw */
+}
+
+section p {
+    line-height: 1.6; /* Goede leesbaarheid */
+}
+
+section  {
+    padding-left: 20px; /* Inspringing voor opsommingen */
+}
+
+section ul li {
+    margin-bottom: 10px; /* Ruimte tussen opsomming-items */
+}
+
+section img {
+    max-width: 100%; /* Behoudt schaal van de afbeelding */
+    height: auto; /* Schaalverhouding behouden */
+    border-radius: 5px; /* Afgeronde hoeken voor een moderne look */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1); /* Subtiele schaduw rond afbeeldingen */
+}
+
+/* Stijl voor knoppen en formulieren */
+button {
+    background-color: #333; /* Donkere kleur voor knoppen */
+    color: white; /* Witte tekstkleur */
+    padding: 10px 20px; /* Ruimte rond de knop */
+    border: none; /* Geen rand */
+    border-radius: 5px; /* Afgeronde hoeken */
+    cursor: pointer; /* Cursor verandert naar pointer bij hover */
+}
+
+button:hover {
+    background-color: #555; /* Kleur bij hover */
+}
+
+input, textarea {
+    padding: 10px; /* Ruimte binnenin velden */
+    border: 1px solid #ccc; /* Subtiele rand */
+    border-radius: 5px; /* Afgeronde hoeken */
+    width: 100%; /* Zorgt voor volledige breedte */
+}
+
+textarea {
+    resize: vertical; /* Alleen verticale aanpassing */
+}

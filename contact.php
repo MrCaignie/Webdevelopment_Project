@@ -1,4 +1,13 @@
 <?php
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Create an instance; passing `true` enables exceptions
+$mail = new PHPMailer(true);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verzamelen van gegevens uit het formulier
     $name = trim($_POST["name"]);  // Verwijder onnodige spaties
@@ -11,21 +20,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = "Ongeldig e-mailadres.";
     } else {
-        // Stuur een e-mail naar de judo-club
-        $to = "contact@judoclub.nl";  // Vervang door het juiste e-mailadres
-        $subject = "Contactverzoek van $name";
-        $headers = "From: $email";
+        // Setup PHPMailer
+        $mail = new PHPMailer(true);
 
-        // Body van de e-mail
-        $email_body = "Naam: $name\n";
-        $email_body .= "E-mail: $email\n";
-        $email_body .= "Bericht:\n$message\n";
+        try {
+            //Server settings
+            $mail->SMTPDebug = 0;  //Change to DEBUG_SERVER for detailed logs
+            $mail->isSMTP();                      //Send using SMTP
+            $mail->Host = 'smtp.example.com';     //Set the SMTP server to send through
+            $mail->SMTPAuth = true;               //Enable SMTP authentication
+            $mail->Username = 'user@example.com'; //SMTP username
+            $mail->Password = 'secret';           //SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //TLS encryption
+            $mail->Port = 465;                    //TCP port for SMTPS, use 587 with STARTTLS
 
-        // Stuur de e-mail
-        if (mail($to, $subject, $email_body, $headers)) {
+            //Recipients
+            $mail->setFrom($email, $name);  // Set sender with user's email and name
+            $mail->addAddress('contact@judoclub.nl', 'Judo Club'); //Recipient
+
+            //Content
+            $mail->isHTML(false);  // Plain text email
+            $mail->Subject = "Contactverzoek van $name";
+            $mail->Body = "Naam: $name\nE-mail: $email\nBericht:\n$message";
+
+            // Send the email
+            $mail->send();
             $success = "Bedankt voor het contact opnemen! We zullen zo snel mogelijk reageren.";
-        } else {
-            $error = "Er ging iets mis. Probeer het later opnieuw.";
+        } catch (Exception $e) {
+            $error = "Er ging iets mis. Mailer Error: {$mail->ErrorInfo}";
         }
     }
 }
