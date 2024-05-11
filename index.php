@@ -8,7 +8,7 @@ session_start(); // Start de sessie om gegevens te behouden tussen verschillende
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index Pagina</title>
-    <link rel="stylesheet" href="style_index.css"> <!-- Verwijst naar je CSS-stijlen -->
+    <link rel="stylesheet" href="style_index1.css"> <!-- Verwijst naar je CSS-stijlen -->
 </head>
 <body>
     <nav> <!-- Verzamelt alle navigatie-items -->
