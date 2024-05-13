@@ -1,55 +1,73 @@
 <?php
-//Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+session_start();
 
-//Create an instance; passing `true` enables exceptions
-$mail = new PHPMailer(true);
+function getMessages($conn) {
+    $query = "SELECT * FROM messages";
+    $result = $conn->query($query);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verzamelen van gegevens uit het formulier
-    $name = trim($_POST["name"]);  // Verwijder onnodige spaties
-    $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);  // Sanitize e-mail
-    $message = htmlspecialchars($_POST["message"]);  // Bescherm tegen HTML-injectie
-
-    // Valideren van gegevens
-    if (empty($name) || empty($email) || empty($message)) {
-        $error = "Vul alle velden in.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = "Ongeldig e-mailadres.";
-    } else {
-        // Setup PHPMailer
-        $mail = new PHPMailer(true);
-
-        try {
-            //Server settings
-            $mail->SMTPDebug = 0;  //Change to DEBUG_SERVER for detailed logs
-            $mail->isSMTP();                      //Send using SMTP
-            $mail->Host = 'smtp.example.com';     //Set the SMTP server to send through
-            $mail->SMTPAuth = true;               //Enable SMTP authentication
-            $mail->Username = 'user@example.com'; //SMTP username
-            $mail->Password = 'secret';           //SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //TLS encryption
-            $mail->Port = 465;                    //TCP port for SMTPS, use 587 with STARTTLS
-
-            //Recipients
-            $mail->setFrom($email, $name);  // Set sender with user's email and name
-            $mail->addAddress('contact@judoclub.nl', 'Judo Club'); //Recipient
-
-            //Content
-            $mail->isHTML(false);  // Plain text email
-            $mail->Subject = "Contactverzoek van $name";
-            $mail->Body = "Naam: $name\nE-mail: $email\nBericht:\n$message";
-
-            // Send the email
-            $mail->send();
-            $success = "Bedankt voor het contact opnemen! We zullen zo snel mogelijk reageren.";
-        } catch (Exception $e) {
-            $error = "Er ging iets mis. Mailer Error: {$mail->ErrorInfo}";
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            // Klassen toewijzen op basis van wie het bericht heeft gepost
+            $class = ($_SESSION['username'] === $row["username"]) ? 'user-message' : 'other-message';
+            echo "<div class='$class'><strong>" . $row["username"] . ":</strong> " . $row["message"] . "</div>";
+            if ($_SESSION['rol'] === 'admin') {
+                echo '<a href="?delete=' . $row['id'] . '">Verwijder</a><br>';
+            }
         }
+    } else {
+        echo "Geen berichten gevonden.";
     }
+}
+
+
+// Verbinding met de database maken
+$conn = new mysqli("localhost", "root", "", "project");
+if ($conn->connect_error) {
+    die("Verbindingsfout: " . $conn->connect_error);
+}
+
+// Bericht posten
+if (isset($_POST['message'])) {
+    if (!isset($_SESSION['username'])) {
+        echo "Je moet ingelogd zijn om een bericht te plaatsen.";
+    } else {
+        $message = $_POST['message'];
+        $username = $_SESSION['username'];
+        $timestamp = date("Y-m-d"); // Huidige datum
+        
+        $stmt = $conn->prepare("INSERT INTO messages (username, message, date) VALUES (?, ?, ?)");
+        if (!$stmt) {
+            die("Fout bij voorbereiden van de query: " . $conn->error);
+        }
+        
+        $bind_result = $stmt->bind_param("sss", $username, $message, $timestamp);
+        if (!$bind_result) {
+            die("Fout bij binden van parameters: " . $stmt->error);
+        }
+        
+        $execute_result = $stmt->execute();
+        if (!$execute_result) {
+            die("Fout bij uitvoeren van de query: " . $stmt->error);
+        }
+        
+        $stmt->close();
+    
+        header("Location: ".$_SERVER['PHP_SELF']); // Refresh de pagina om het nieuwe bericht weer te geven
+        exit;
+    }
+}
+
+
+// Bericht verwijderen (alleen voor admins)
+if (isset($_GET['delete']) && $_SESSION['rol'] === 'admin') {
+    $message_id = $_GET['delete'];
+    $stmt = $conn->prepare("DELETE FROM messages WHERE id = ?");
+    $stmt->bind_param("i", $message_id);
+    $stmt->execute();
+    $stmt->close();
+    
+    header("Location: ".$_SERVER['PHP_SELF']); // Refresh de pagina om het verwijderde bericht niet meer weer te geven
+    exit;
 }
 
 ?>
@@ -59,34 +77,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index Pagina</title>
-    <link rel="stylesheet" href="style.css"> <!-- Verwijst naar je CSS-stijlen -->
+    <link rel="stylesheet" href="style__contact.css">
+    <title>Gastenboek</title>
 </head>
 <body>
-    <nav> <!-- Verzamelt alle navigatie-items -->
-        <ul>
-            <li><a href=index.php>Home</a></li> <!-- Links aan de linkerkant -->
-            <li><a href="about.php">Info</a></li>
-            <li><a href="news.php">News</a></li>
-            <li><a href="contact.php">Contact</a></li>
-            <li class="login"><a href="login.php">Login</a></li> <!-- Log in knop aan de rechterkant -->
-            <li class="registreren"><a href="registreren.php">Registreren</a></li>
-        </ul>
-    </nav>
-
-    <h1>Contact opnemen met de Judo Club</h1>
+    <h1>GastenBoek/ Klantenservice</h1>
+    <h2>Als er vragen zijn stuur via deze pagina we zullen zo snel mogelijk reageren. Onderaan deze pagina staan er ook nog andere manieren om ons te contacteren.</h1>
     
-    <?php if (isset($success)) { ?>
-        <p><?php echo $success; ?></p>  <!-- Bericht bij succesvolle verzending -->
-    <?php } elseif (isset($error)) { ?>
-        <p><?php echo $error; ?></p>  <!-- Bericht bij een fout -->
-    <?php } ?>
-    
-    <form method="post" action="">
-        Naam: <input type="text" name="name" required><br>
-        E-mail: <input type="email" name="email" required><br>
-        Bericht: <textarea name="message" required></textarea><br>
-        <button type="submit">Verstuur</button>
+    <section>
+    <!-- Berichtformulier -->
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <textarea name="message" rows="4" cols="50" required class="message"></textarea><br>
+        <button type="submit" class="send">Bericht versturen</button>
     </form>
+    </section>
+    <section>
+    <!-- Weergeven van berichten -->
+    <?php getMessages($conn); ?>
+    </section>
+    <section>
+    <!-- Uitlogknop (optioneel) -->
+    <?php if (isset($_SESSION['username'])): ?>
+        <form method="post" action="index.php">
+            <button type="submit" class="logout">Uitloggen</button>
+        </form>
+    <?php endif; ?>
+    </section>
+    <section>
+        <div class="contacteren">
+        <p>Telefoonnummer: +32 0494 49 20 21</p> <!-- Vervang met je telefoonnummer -->
+        <p>E-mail: <a href="mailto: info@neko-ieper.be">e-mail</a></p> <!-- Vervang met je e-mailadres -->
+        </div>
+    </section>
 </body>
 </html>
+
+<?php
+$conn->close();
+?>
