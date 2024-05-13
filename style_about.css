@@ -1,0 +1,185 @@
+.navigatie {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: #111;
+}
+
+.login, .registreren {
+    float: right;
+}
+
+body {
+    font-size: 25px;  /* Standaard lettergrootte in pixels */
+    background-color: #f0f0f0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 50px;
+    color: #333;
+}
+
+section {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #007bff;
+}
+
+p {
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
+
+.textblok1 {
+    flex: 1;
+}
+
+.img1 {
+    flex: 1;
+    text-align: right;
+    padding-left: 20px;
+}
+
+.img1 img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    max-width: 100%;
+    max-height: 300px;
+    height: auto;
+    display: block;
+}
+
+.textblok2 {
+    flex: 1;
+}
+
+.img2 {
+    flex: 1;
+    text-align: right;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.img2 img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    max-width: 100%;
+    max-height: 300px;
+    height: auto;
+    display: block;
+}
+
+.textblok3 {
+    flex: 1;
+}
+
+.img3 {
+    flex: 1;
+    padding-left: 20px;
+}
+
+.img3 img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    max-width: 100%;
+    max-height: 300px;
+    height: auto;
+    display: block;
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #000000;
+    color: #ffffff;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#panel, #flip {
+    padding: center;
+    text-align: center;
+    background-color: #333;
+    border: solid 1px #333;
+}
+
+#panel {
+    padding: 20px; /* Verklein de padding van het paneel */
+    max-height: 200px; /* Stel een maximale hoogte in voor het paneel */
+    overflow-y: auto; /* Voeg een scrollbar toe als de inhoud groter is dan de hoogte */
+    max-width: 160px;
+}
+
+#panel ul {
+    list-style-type: none; /* Verwijder de standaard opsommingstekens */
+    padding: 0; /* Verwijder padding om de lijsten dichter bij elkaar te plaatsen */
+    margin: 0; /* Verwijder marges om de lijsten dichter bij elkaar te plaatsen */
+}
+
+#panel li {
+    text-align: center; /* Centreer de tekst in de lijsten */
+}
+
+#panel li a {
+    display: block; /* Maak de ankerlinks blokken om de volledige breedte te gebruiken */
+    padding: 10px; /* Voeg wat padding toe aan de ankerlinks voor visuele scheiding */
+}
+
+section {
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

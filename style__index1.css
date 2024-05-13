@@ -1,0 +1,124 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /* Change the link color to #111 (black) on hover */
+  li a:hover {
+    background-color: #111;
+  }
+
+  .login, .registreren {
+    float: right;
+  }
+  
+  body {
+    font-size: 25px;  /* Standaard lettergrootte in pixels */
+    background-color: #f0f0f0;
+}
+
+.contact-info {
+    background-color: #ffffff; /* Achtergrondkleur van het contactgedeelte */
+    padding: 20px;
+}
+
+.contact-info h2 {
+    margin-bottom: 10px;
+    color: #007bff; /* Tekstkleur van de contactinformatie kop */
+}
+
+.social-media a {
+    display: inline-block;
+    margin-right: 10px; /* Ruimte tussen de sociale media pictogrammen */
+    color: #007bff; /* Kleur van de sociale media pictogrammen */
+    text-decoration: none;
+}
+
+.social-media a:hover {
+    text-decoration: underline; /* Onderstreep de link bij hover */
+}
+
+#panel, #flip {
+  padding: center;
+  text-align: center;
+  background-color: #333;
+  border: solid 1px #333;
+}
+
+#panel {
+  padding: 20px; /* Verklein de padding van het paneel */
+  max-height: 200px; /* Stel een maximale hoogte in voor het paneel */
+  overflow-y: auto; /* Voeg een scrollbar toe als de inhoud groter is dan de hoogte */
+  max-width: 160px;
+}
+
+#panel ul {
+  list-style-type: none; /* Verwijder de standaard opsommingstekens */
+  padding: 0; /* Verwijder padding om de lijsten dichter bij elkaar te plaatsen */
+  margin: 0; /* Verwijder marges om de lijsten dichter bij elkaar te plaatsen */
+}
+
+#panel li {
+  text-align: center; /* Centreer de tekst in de lijsten */
+}
+
+#panel li a {
+  display: block; /* Maak de ankerlinks blokken om de volledige breedte te gebruiken */
+  padding: 10px; /* Voeg wat padding toe aan de ankerlinks voor visuele scheiding */
+}
+
+section {
+  background-color: #ffffff;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+
+p {
+    line-height: 1.6;
+    color: #555;
+}
+
+section {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.training2015 {
+    margin-left: 20px; /* Add some space between the text and the image */
+}
+
+.Jeugdsport {
+    float: right;
+    margin-right: 20px; /* Add some space between the text and the image */
+}
