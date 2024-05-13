@@ -66,9 +66,9 @@ session_start(); // Start de sessie om gegevens te behouden tussen verschillende
     <!-- Contactinformatie -->
     <section class="contact-info">
         <h2>Contactinformatie</h2>
-        <p>Adres: Brugseweg, 12, Ieper, 8900</p> <!-- Vervang met je clubadres -->
-        <p>Telefoonnummer: +32 0494 49 20 21</p> <!-- Vervang met je telefoonnummer -->
-        <p>E-mail: <a href="mailto: info@neko-ieper.be">e-mail</a></p> <!-- Vervang met je e-mailadres -->
+        <p>Adres: Brugseweg, 12, Ieper, 8900</p> 
+        <p>Telefoonnummer: +32 0494 49 20 21</p> 
+        <p>E-mail: <a href="mailto: info@neko-ieper.be">e-mail</a></p> 
     </section>
 </body>
 </html>
