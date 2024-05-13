@@ -1,4 +1,8 @@
 <?php
+//
+// Voor inlog als admin -> wachtwoord is dan: kC140905 (puur voor leerkracht indien nodig)
+// Pagina voor mijn github: https://github.com/MrCaignie/Webdevelopment_Project
+//
 // Start een sessie
 session_start();
 ?>
